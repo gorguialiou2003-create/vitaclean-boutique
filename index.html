@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Vita Clean | Spray naturel pour brosses à dents</title>
+    <!-- Font Awesome 6 (icônes gratuites) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts : Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #eef6f0 0%, #d9e9df 100%);
+            color: #1e2f2c;
+            padding: 0 0 40px 0;
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 30px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #c0dfce;
+        }
+
+        .logo h1 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1b5e3f, #3e9f6e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo p {
+            font-size: 0.85rem;
+            color: #2a6b49;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .cart-badge {
+            background: #fff;
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-badge i {
+            font-size: 1.5rem;
+            color: #216e46;
+        }
+
+        .cart-count {
+            background: #216e46;
+            color: white;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Grille produits + panier */
+        .shop-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 35px;
+            align-items: start;
+        }
+
+        /* Section produits */
+        .products-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            background: white;
+            border-radius: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 25px;
+            padding: 30px;
+            box-shadow: 0 20px 35px rgba(0, 32, 0, 0.08);
+            transition: all 0.25s ease;
+            border: 1px solid #d9f0e4;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-icon {
+            flex: 0 0 110px;
+            text-align: center;
+        }
+
+        .product-icon i {
+            font-size: 85px;
+            color: #2c7a4b;
+            filter: drop-shadow(4px 8px 12px rgba(0,0,0,0.1));
+        }
+
+        .product-details {
+            flex: 2;
+        }
+
+        .product-details h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #154f39;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: #e0f3e9;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin: 10px 0 6px;
+            color: #1e6a48;
+        }
+
+        .product-desc {
+            color: #446b5c;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            max-width: 350px;
+        }
+
+        .price {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #174f3a;
+            margin: 8px 0;
+        }
+
+        .price small {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #4f7b68;
+        }
+
+        .cart-actions {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-width: 150px;
+        }
+
+        .qty-selector {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f4fcf8;
+            border-radius: 60px;
+            padding: 5px 12px;
+            border: 1px solid #cde6db;
+        }
+
+        .qty-selector button {
+            background: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #1e6a48;
+            transition: 0.1s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .qty-selector button:hover {
+            background: #d4f0e4;
+        }
+
+        .qty-selector span {
+            font-weight: 700;
+            font-size: 1.2rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .btn-add {
+            background: #1f6e43;
+            border: none;
+            color: white;
+            padding: 12px 0;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .btn-add:hover {
+            background: #0e5537;
+            transform: scale(0.97);
+        }
+
+        /* Panier */
+        .cart-panel {
+            background: white;
+            border-radius: 40px;
+            padding: 25px 22px;
+            box-shadow: 0 20px 35px rgba(0, 20, 0, 0.08);
+            position: sticky;
+            top: 20px;
+            border: 1px solid #d2ecdf;
+        }
+
+        .cart-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #154f39;
+            border-bottom: 2px dashed #cae6d8;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cart-items-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 6px;
+        }
+
+        .cart-item {
+            background: #fdfdfd;
+            border-radius: 24px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #e2f2ea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-item-info {
+            flex: 2;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.75rem;
+            color: #2c7a4b;
+            font-weight: 600;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-qty-btn {
+            background: #eef6f2;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cart-item-qty {
+            font-weight: 600;
+            min-width: 28px;
+            text-align: center;
+        }
+
+        .cart-remove {
+            background: none;
+            border: none;
+            color: #c06a54;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 800;
+            padding: 15px 0;
+            border-top: 2px solid #ddefe6;
+            margin: 12px 0;
+        }
+
+        .checkout-btn {
+            background: #154f39;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: 0.2s;
+        }
+
+        .checkout-btn:hover {
+            background: #0e3e2c;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #8bb7a4;
+            padding: 35px 15px;
+            font-style: italic;
+        }
+
+        /* Section bienfaits */
+        .benefits {
+            margin-top: 60px;
+            background: #ffffffbb;
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            padding: 35px 30px;
+            background: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            border: 1px solid #cfebdf;
+        }
+
+        .benefit-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .benefit-item i {
+            font-size: 2.3rem;
+            color: #2c7a4b;
+            margin-bottom: 12px;
+        }
+
+        .benefit-item h4 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #3f6a58;
+            font-size: 0.8rem;
+            border-top: 1px solid #c5dfd2;
+            padding-top: 25px;
+        }
+
+        @media (max-width: 880px) {
+            .shop-layout {
+                grid-template-columns: 1fr;
+            }
+            .cart-panel {
+                position: static;
+                margin-top: 20px;
+            }
+            .container {
+                padding: 20px 18px;
+            }
+            .product-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .cart-actions {
+                width: 100%;
+            }
+        }
+
+        .toast-notify {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e3b2f;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            z-index: 2000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: fadeOut 3s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <h1><i class="fas fa-leaf" style="color: #2c7a4b;"></i> Vita Clean</h1>
+            <p>Naturel, local, efficace · Stérilisateur pour brosse à dents</p>
+        </div>
+        <div class="cart-badge">
+            <i class="fas fa-shopping-basket"></i>
+            <span class="cart-count" id="cartCountDisplay">0</span>
+        </div>
+    </div>
+
+    <div class="shop-layout">
+        <!-- Section Produits -->
+        <div class="products-grid">
+            <!-- Produit 50ml -->
+            <div class="product-card" data-product-id="1" data-product-name="Vita Clean 50 ml" data-product-price="2500">
+                <div class="product-icon">
+                    <i class="fas fa-spray-can-sparkles"></i>
+                </div>
+                <div class="product-details">
+                    <h2>Vita Clean 50 ml</h2>
+                    <span class="product-badge"><i class="fas fa-check-circle"></i> Format voyage</span>
+                    <div class="product-desc">Spray stérilisant naturel · Neem & Eucalyptus · Idéal pour sac, déplacements, hygiène quotidienne.</div>
+                    <div class="price">2 500 FCFA <small>HT / TTC</small></div>
+                </div>
+                <div class="cart-actions">
+                    <div class="qty-selector">
+                        <button class="qty-minus" data-id="1">-</button>
+                        <span class="qty-value" id="qty-1">1</span>
+                        <button class="qty-plus" data-id="1">+</button>
+                    </div>
+                    <button class="btn-add add-to-cart-btn" data-id="1">
+                        <i class="fas fa-cart-plus"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produit 100ml -->
+            <div class="product-card" data-product-id="2" data-product-name="Vita Clean 100 ml" data-product-price="4000">
+                <div class="product-icon">
+                    <i class="fas fa-jug-detergent"></i>
+                </div>
+                <div class="product-details">
+                    <h2>Vita Clean 100 ml</h2>
+                    <span class="product-badge"><i class="fas fa-home"></i> Format familial</span>
+                    <div class="product-desc">Économique et puissant · idéal pour toute la famille · Jusqu'à 3 mois d'utilisation.</div>
+                    <div class="price">4 000 FCFA <small>HT / TTC</small></div>
+                </div>
+                <div class="cart-actions">
+                    <div class="qty-selector">
+                        <button class="qty-minus" data-id="2">-</button>
+                        <span class="qty-value" id="qty-2">1</span>
+                        <button class="qty-plus" data-id="2">+</button>
+                    </div>
+                    <button class="btn-add add-to-cart-btn" data-id="2">
+                        <i class="fas fa-cart-plus"></i> Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panier latéral -->
+        <div class="cart-panel">
+            <div class="cart-title">
+                <i class="fas fa-bag-shopping"></i> Mon panier
+            </div>
+            <div id="cartItemsContainer" class="cart-items-list">
+                <div class="empty-cart">Votre panier est vide.<br>Ajoutez Vita Clean pour une hygiène parfaite !</div>
+            </div>
+            <div class="cart-total" id="cartTotalArea">
+                <span>Total :</span>
+                <span id="cartTotalPrice">0 FCFA</span>
+            </div>
+            <button id="checkoutBtn" class="checkout-btn">
+                <i class="fas fa-truck-fast"></i> Passer la commande
+            </button>
+            <button id="clearCartBtn" style="margin-top: 12px; background:#e9f3ef; color:#2c5e46; border:1px solid #bcddce; width:100%; padding: 8px; border-radius: 50px; cursor:pointer; font-weight:500;">
+                <i class="fas fa-trash-alt"></i> Vider le panier
+            </button>
+        </div>
+    </div>
+
+    <!-- Section valeurs / avantages -->
+    <div class="benefits">
+        <div class="benefit-item"><i class="fas fa-seedling"></i><h4>100% Naturel</h4><p>Neem & eucalyptus · Sans produits chimiques agressifs</p></div>
+        <div class="benefit-item"><i class="fas fa-map-marker-alt"></i><h4>Fabriqué au Sénégal</h4><p>Ingrédients locaux · Soutien à l’économie nationale</p></div>
+        <div class="benefit-item"><i class="fas fa-shield-alt"></i><h4>Antibactérien</h4><p>Élimine 99% des bactéries des brosses à dents</p></div>
+        <div class="benefit-item"><i class="fas fa-recycle"></i><h4>Éco-responsable</h4><p>Emballages recyclables · Zéro déchet inutile</p></div>
+    </div>
+    <div class="footer">
+        <i class="fas fa-heart" style="color:#2c7a4b;"></i> Vita Clean – Prenez soin de votre sourire naturellement | Livraison disponible à Thiès, Dakar, Mbour
+    </div>
+</div>
+
+<script>
+    // Gestion du panier (stocké en mémoire)
+    let cart = []; // chaque item : { id, name, price, quantity }
+
+    // Éléments DOM
+    const cartContainer = document.getElementById('cartItemsContainer');
+    const cartTotalSpan = document.getElementById('cartTotalPrice');
+    const cartCountDisplay = document.getElementById('cartCountDisplay');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const clearCartBtn = document.getElementById('clearCartBtn');
+
+    // Helper: sauvegarde dans localStorage (optionnel) mais on utilisera une variable pour la session
+    function saveCart() {
+        // On ne stocke pas obligatoirement, mais c'est pratique pour rechargement
+        localStorage.setItem('vitaCleanCart', JSON.stringify(cart));
+    }
+
+    function loadCartFromStorage() {
+        const stored = localStorage.getItem('vitaCleanCart');
+        if (stored) {
+            try {
+                cart = JSON.parse(stored);
+                if (!Array.isArray(cart)) cart = [];
+            } catch(e) { cart = []; }
+        } else {
+            cart = [];
+        }
+        renderCart();
+    }
+
+    // Mettre à jour l'affichage du panier
+    function renderCart() {
+        if (!cartContainer) return;
+        if (cart.length === 0) {
+            cartContainer.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-cart"></i> Votre panier est vide.<br>Ajoutez Vita Clean pour une hygiène parfaite !</div>`;
+            cartTotalSpan.innerText = `0 FCFA`;
+            cartCountDisplay.innerText = '0';
+            return;
+        }
+
+        let total = 0;
+        let totalItems = 0;
+        let html = '';
+
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+            totalItems += item.quantity;
+            html += `
+                <div class="cart-item" data-cart-index="${index}">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${escapeHtml(item.name)}</div>
+                        <div class="cart-item-price">${item.price.toLocaleString()} FCFA</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="cart-qty-btn cart-dec" data-id="${item.id}" data-action="dec">−</button>
+                        <span class="cart-item-qty">${item.quantity}</span>
+                        <button class="cart-qty-btn cart-inc" data-id="${item.id}" data-action="inc">+</button>
+                        <button class="cart-remove" data-id="${item.id}" title="Supprimer"><i class="fas fa-trash-can"></i></button>
+                    </div>
+                    <div style="font-weight:600; min-width:70px; text-align:right;">${itemTotal.toLocaleString()} FCFA</div>
+                </div>
+            `;
+        });
+
+        cartContainer.innerHTML = html;
+        cartTotalSpan.innerText = `${total.toLocaleString()} FCFA`;
+        cartCountDisplay.innerText = totalItems;
+
+        // Attacher les événements pour les boutons du panier
+        document.querySelectorAll('.cart-dec').forEach(btn => {
+            btn.removeEventListener('click', handleCartDec);
+            btn.addEventListener('click', handleCartDec);
+        });
+        document.querySelectorAll('.cart-inc').forEach(btn => {
+            btn.removeEventListener('click', handleCartInc);
+            btn.addEventListener('click', handleCartInc);
+        });
+        document.querySelectorAll('.cart-remove').forEach(btn => {
+            btn.removeEventListener('click', handleCartRemove);
+            btn.addEventListener('click', handleCartRemove);
+        });
+        saveCart();
+    }
+
+    function handleCartDec(e) {
+        const productId = parseInt(e.currentTarget.getAttribute('data-id'));
+        const item = cart.find(i => i.id === productId);
+        if (item) {
+            if (item.quantity > 1) {
+                item.quantity--;
+            } else {
+                // si quantité 1, on supprime l'article
+                cart = cart.filter(i => i.id !== productId);
+            }
+            renderCart();
+            updateProductQtyDisplay(productId);
+            showToast("Quantité mise à jour");
+        }
+    }
+
+    function handleCartInc(e) {
+        const productId = parseInt(e.currentTarget.getAttribute('data-id'));
+        const item = cart.find(i => i.id === productId);
+        if (item) {
+            item.quantity++;
+            renderCart();
+            updateProductQtyDisplay(productId);
+            showToast("Quantité augmentée");
+        }
+    }
+
+    function handleCartRemove(e) {
+        const productId = parseInt(e.currentTarget.getAttribute('data-id'));
+        cart = cart.filter(i => i.id !== productId);
+        renderCart();
+        updateAllProductQtyDisplays();
+        showToast("Article retiré du panier");
+    }
+
+    // Mettre à jour les affichages de quantité dans les produits (pour synchro)
+    function updateProductQtyDisplay(productId) {
+        const cartItem = cart.find(i => i.id === productId);
+        const qtySpan = document.getElementById(`qty-${productId}`);
+        if (qtySpan) {
+            if (cartItem) {
+                qtySpan.innerText = cartItem.quantity;
+            } else {
+                // Si pas dans le panier, remettre à 1 (mais on ne modifie pas le sélecteur par défaut)
+                // On peut laisser la valeur affichée à 1, car le sélecteur est indépendant.
+                // Pour éviter incohérence : on reset le span à 1 si plus rien dans panier
+                qtySpan.innerText = '1';
+            }
+        }
+    }
+
+    function updateAllProductQtyDisplays() {
+        updateProductQtyDisplay(1);
+        updateProductQtyDisplay(2);
+    }
+
+    // Ajout au panier depuis les produits
+    function addToCart(productId, name, price, quantityToAdd = null) {
+        let qty = quantityToAdd;
+        if (qty === null) {
+            // Récupérer la quantité depuis le sélecteur du produit
+            const qtySpan = document.getElementById(`qty-${productId}`);
+            qty = qtySpan ? parseInt(qtySpan.innerText) : 1;
+            if (isNaN(qty) || qty < 1) qty = 1;
+        }
+
+        const existingItem = cart.find(item => item.id === productId);
+        if (existingItem) {
+            existingItem.quantity += qty;
+        } else {
+            cart.push({
+                id: productId,
+                name: name,
+                price: price,
+                quantity: qty
+            });
+        }
+        renderCart();
+        // Réinitialiser le sélecteur de quantité du produit à 1 (optionnel, mais agréable)
+        const qtySpan = document.getElementById(`qty-${productId}`);
+        if (qtySpan) qtySpan.innerText = '1';
+        showToast(`Ajouté : ${name} x${qty}`);
+        saveCart();
+    }
+
+    // toast
+    function showToast(message) {
+        const existingToast = document.querySelector('.toast-notify');
+        if(existingToast) existingToast.remove();
+        const toast = document.createElement('div');
+        toast.className = 'toast-notify';
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            if(toast && toast.remove) toast.remove();
+        }, 2800);
+    }
+
+    // Gestion des événements sur les produits (quantités + / - et ajout)
+    function initProductControls() {
+        // Gestion des boutons + et - sur chaque produit
+        document.querySelectorAll('.qty-minus').forEach(btn => {
+            btn.removeEventListener('click', handleMinus);
+            btn.addEventListener('click', handleMinus);
+        });
+        document.querySelectorAll('.qty-plus').forEach(btn => {
+            btn.removeEventListener('click', handlePlus);
+            btn.addEventListener('click', handlePlus);
+        });
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.removeEventListener('click', handleAddToCart);
+            btn.addEventListener('click', handleAddToCart);
+        });
+    }
+
+    function handleMinus(e) {
+        const productId = parseInt(e.currentTarget.getAttribute('data-id'));
+        const qtySpan = document.getElementById(`qty-${productId}`);
+        let val = parseInt(qtySpan.innerText);
+        if (val > 1) {
+            val--;
+            qtySpan.innerText = val;
+        }
+    }
+
+    function handlePlus(e) {
+        const productId = parseInt(e.currentTarget.getAttribute('data-id'));
+        const qtySpan = document.getElementById(`qty-${productId}`);
+        let val = parseInt(qtySpan.innerText);
+        val++;
+        qtySpan.innerText = val;
+    }
+
+    function handleAddToCart(e) {
+        const btn = e.currentTarget;
+        const productId = parseInt(btn.getAttribute('data-id'));
+        // Récupérer les infos depuis la carte produit
+        const productCard = btn.closest('.product-card');
+        let productName = '';
+        let productPrice = 0;
+        if (productId === 1) {
+            productName = 'Vita Clean 50 ml';
+            productPrice = 2500;
+        } else if (productId === 2) {
+            productName = 'Vita Clean 100 ml';
+            productPrice = 4000;
+        } else {
+            // fallback
+            productName = productCard?.querySelector('h2')?.innerText || 'Vita Clean';
+            const priceText = productCard?.querySelector('.price')?.innerText || '0';
+            productPrice = parseInt(priceText.replace(/\D/g,'')) || 0;
+        }
+        const qtySpan = document.getElementById(`qty-${productId}`);
+        let qty = qtySpan ? parseInt(qtySpan.innerText) : 1;
+        if (isNaN(qty) || qty < 1) qty = 1;
+
+        addToCart(productId, productName, productPrice, qty);
+        // Remettre le compteur du produit à 1 après ajout (meilleure UX)
+        if (qtySpan) qtySpan.innerText = '1';
+    }
+
+    // Passer commande
+    function checkout() {
+        if (cart.length === 0) {
+            showToast("Votre panier est vide. Ajoutez des produits !");
+            return;
+        }
+        let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        let itemsList = cart.map(i => `${i.name} x${i.quantity}`).join(', ');
+        // Simulation de commande
+        alert(`🛍️ Merci pour votre commande Vita Clean !\n\nDétail : ${itemsList}\nTotal : ${total.toLocaleString()} FCFA\n\nUn conseiller vous contactera sous 24h pour la livraison.\nSanté & nature ✨`);
+        // Vider le panier après commande (optionnel)
+        cart = [];
+        renderCart();
+        updateAllProductQtyDisplays();
+        saveCart();
+        showToast("Commande envoyée ! Merci.");
+    }
+
+    function clearCart() {
+        if(cart.length === 0) {
+            showToast("Panier déjà vide");
+            return;
+        }
+        cart = [];
+        renderCart();
+        updateAllProductQtyDisplays();
+        showToast("Panier vidé");
+        saveCart();
+    }
+
+    // Helper anti XSS simple
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // Initialisation globale
+    function init() {
+        loadCartFromStorage();
+        initProductControls();
+        checkoutBtn.addEventListener('click', checkout);
+        clearCartBtn.addEventListener('click', clearCart);
+    }
+
+    init();
+</script>
+</body>
+</html>
